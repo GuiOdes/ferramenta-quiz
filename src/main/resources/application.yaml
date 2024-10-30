@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: Quiz
+  datasource:
+      url: jdbc:postgresql://localhost:5432/quiz
+      username: root
+      password: root
