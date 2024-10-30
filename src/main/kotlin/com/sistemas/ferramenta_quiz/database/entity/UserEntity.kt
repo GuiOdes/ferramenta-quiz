@@ -5,7 +5,7 @@ import jakarta.persistence.*
 import org.springframework.data.jpa.domain.AbstractPersistable_.id
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 class UserEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
