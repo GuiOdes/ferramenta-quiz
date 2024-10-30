@@ -5,10 +5,3 @@ spring:
       url: jdbc:postgresql://localhost:5432/quiz
       username: root
       password: root
-
-security:
-  jwt:
-    expiration-seconds: 86400000
-  key:
-    public: classpath:key.pub
-    private: classpath:key.app
