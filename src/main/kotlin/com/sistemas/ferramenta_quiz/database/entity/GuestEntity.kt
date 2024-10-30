@@ -1,6 +1,6 @@
-package com.sistemas.ferramentaquiz.database.entity
+package com.sistemas.ferramenta_quiz.database.entity
 
-import com.sistemas.ferramentaquiz.dto.GuestDto
+import com.sistemas.ferramenta_quiz.dto.GuestDto
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType

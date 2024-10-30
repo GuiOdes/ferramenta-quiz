@@ -1,6 +1,6 @@
-package com.sistemas.ferramentaquiz.api.request
+package com.sistemas.ferramenta_quiz.api.request
 
-import com.sistemas.ferramentaquiz.dto.GuestDto
+import com.sistemas.ferramenta_quiz.dto.GuestDto
 import jakarta.validation.constraints.NotBlank
 
 data class CreateGuestRequest(

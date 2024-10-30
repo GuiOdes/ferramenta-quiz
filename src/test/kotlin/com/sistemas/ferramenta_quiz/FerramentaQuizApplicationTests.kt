@@ -1,4 +1,4 @@
-package com.sistemas.ferramentaquiz
+package com.sistemas.ferramenta_quiz
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
@@ -6,8 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest
 @SpringBootTest
 class FerramentaQuizApplicationTests {
 
-    @Test
-    fun contextLoads() {
-        println("Hello, World!")
-    }
+	@Test
+	fun contextLoads() {
+	}
+
 }
