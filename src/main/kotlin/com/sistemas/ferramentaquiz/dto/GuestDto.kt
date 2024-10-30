@@ -1,6 +1,6 @@
-package com.sistemas.ferramenta_quiz.dto
+package com.sistemas.ferramentaquiz.dto
 
-import com.sistemas.ferramenta_quiz.database.entity.GuestEntity
+import com.sistemas.ferramentaquiz.database.entity.GuestEntity
 
 data class GuestDto(
     val id: Long? = null,
