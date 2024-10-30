@@ -1,8 +1,7 @@
-package com.sistemas.ferramenta_quiz.database.entity
+package com.sistemas.ferramentaquiz.database.entity
 
-import com.sistemas.ferramenta_quiz.dto.UserDto
+import com.sistemas.ferramentaquiz.dto.UserDto
 import jakarta.persistence.*
-import org.springframework.data.jpa.domain.AbstractPersistable_.id
 
 @Entity
 @Table(name = "user")

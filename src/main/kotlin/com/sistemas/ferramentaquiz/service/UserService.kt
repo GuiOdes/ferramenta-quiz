@@ -1,7 +1,7 @@
-package com.sistemas.ferramenta_quiz.service
+package com.sistemas.ferramentaquiz.service
 
-import com.sistemas.ferramenta_quiz.api.request.CreateUserRequest
-import com.sistemas.ferramenta_quiz.database.repository.UserRepository
+import com.sistemas.ferramentaquiz.api.request.CreateUserRequest
+import com.sistemas.ferramentaquiz.database.repository.UserRepository
 import org.springframework.stereotype.Service
 
 @Service

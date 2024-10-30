@@ -1,6 +1,6 @@
-package com.sistemas.ferramenta_quiz.dto
+package com.sistemas.ferramentaquiz.dto
 
-import com.sistemas.ferramenta_quiz.database.entity.UserEntity
+import com.sistemas.ferramentaquiz.database.entity.UserEntity
 
 class UserDto(
     val id: Long? = null,

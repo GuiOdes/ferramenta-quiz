@@ -1,6 +1,6 @@
-package com.sistemas.ferramenta_quiz.database.repository.data
+package com.sistemas.ferramentaquiz.database.repository.data
 
-import com.sistemas.ferramenta_quiz.database.entity.GuestEntity
+import com.sistemas.ferramentaquiz.database.entity.GuestEntity
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface GuestSpringDataRepository: JpaRepository<GuestEntity, Long>

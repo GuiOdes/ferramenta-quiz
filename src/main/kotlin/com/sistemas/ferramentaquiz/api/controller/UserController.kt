@@ -1,7 +1,7 @@
-package com.sistemas.ferramenta_quiz.api.controller
+package com.sistemas.ferramentaquiz.api.controller
 
-import com.sistemas.ferramenta_quiz.api.request.CreateUserRequest
-import com.sistemas.ferramenta_quiz.service.UserService
+import com.sistemas.ferramentaquiz.api.request.CreateUserRequest
+import com.sistemas.ferramentaquiz.service.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
