@@ -1,7 +1,7 @@
-package com.sistemas.ferramenta_quiz.database.repository
+package com.sistemas.ferramentaquiz.database.repository
 
-import com.sistemas.ferramenta_quiz.database.repository.data.GuestSpringDataRepository
-import com.sistemas.ferramenta_quiz.dto.GuestDto
+import com.sistemas.ferramentaquiz.database.repository.data.GuestSpringDataRepository
+import com.sistemas.ferramentaquiz.dto.GuestDto
 import org.springframework.stereotype.Repository
 
 @Repository

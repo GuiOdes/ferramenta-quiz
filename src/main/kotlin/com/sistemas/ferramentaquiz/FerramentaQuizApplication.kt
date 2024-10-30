@@ -1,4 +1,4 @@
-package com.sistemas.ferramenta_quiz
+package com.sistemas.ferramentaquiz
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class FerramentaQuizApplication
 
 fun main(args: Array<String>) {
-	runApplication<FerramentaQuizApplication>(*args)
+    runApplication<FerramentaQuizApplication>(*args)
 }
