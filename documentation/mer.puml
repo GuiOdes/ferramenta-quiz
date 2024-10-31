@@ -12,6 +12,7 @@ entity "Quiz" as quiz {
   --
   code : VARCHAR(45)
   is_done : BOOLEAN
+  user_id : LONG
 }
 
 entity "Question" as question {
@@ -29,11 +30,6 @@ entity "Option" as option {
   is_right : BOOLEAN
 }
 
-entity "UserOwnQuiz" as user_own_quiz {
-  * user_id : LONG
-  * quiz_id : LONG
-}
-
 entity "Guest" as guest {
   * id : LONG
   --
@@ -47,8 +43,7 @@ entity "QuizGuest" as quiz_guest {
   * guest_id : LONG
 }
 
-user ||--o{ user_own_quiz : "owns"
-quiz ||--o{ user_own_quiz : ""
+user ||--o{ quiz : "owns"
 quiz ||--o{ question : "contains"
 question ||--o{ option : "has"
 quiz ||--o{ quiz_guest : "includes"
