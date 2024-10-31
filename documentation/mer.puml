@@ -11,6 +11,7 @@ entity "Quiz" as quiz {
   * id : LONG
   --
   code : VARCHAR(45)
+  title : VARCHAR(45)
   is_done : BOOLEAN
   user_id : LONG
 }
