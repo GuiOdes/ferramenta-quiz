@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 class GuestService(
     private val repository: GuestRepository
 ) {
-    //test
+    // test
     fun save(request: CreateGuestRequest) = repository.save(request.toDto())
 
     fun findAll() = repository.findAll()
