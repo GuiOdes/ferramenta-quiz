@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class FerramentaQuizApplication
 
 fun main(args: Array<String>) {
-	runApplication<FerramentaQuizApplication>(*args)
+    runApplication<FerramentaQuizApplication>(*args)
 }

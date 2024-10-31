@@ -6,11 +6,13 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class UserRepository(
-    private val UserSpringDataRepository: UserSpringDataRepository
+    private val userSpringDataRepository: UserSpringDataRepository
 ) {
-    fun save(user: UserDto) = UserSpringDataRepository.save(
+    fun save(user: UserDto) = userSpringDataRepository.save(
         user.toEntity()
     ).toDto()
 
-    fun findAll() = UserSpringDataRepository.findAll().map { it.toDto() }
+    fun findAll() = userSpringDataRepository.findAll().map { it.toDto() }
+
+    fun findByEmail(email: String) = userSpringDataRepository.findByEmail(email)?.toDto()
 }
