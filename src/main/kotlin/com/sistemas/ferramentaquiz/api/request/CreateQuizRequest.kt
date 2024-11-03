@@ -5,6 +5,5 @@ import org.apache.catalina.User
 
 data class CreateQuizRequest(
     @field:NotBlank(message = "title is required")
-    val title: String,
-    val code: String? = null
+    val title: String
 )
