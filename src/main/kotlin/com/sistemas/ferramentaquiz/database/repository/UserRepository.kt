@@ -13,10 +13,7 @@ class UserRepository(
         user.toEntity()
     ).toDto()
 
-
-    fun findAll() = UserSpringDataRepository.findAll().map { it.toDto() }
-
-    fun findById(id: Long): Optional<UserDto> = UserSpringDataRepository.findById(id).map { it.toDto() }
+    fun findById(id: Long): Optional<UserDto> = userSpringDataRepository.findById(id).map { it.toDto() }
 
     fun findAll() = userSpringDataRepository.findAll().map { it.toDto() }
 
