@@ -17,7 +17,7 @@ class GuestEntity(
     val id: Long? = null,
     val name: String,
     val ip: String,
-    val score: Int = 0
+    var score: Int = 0
 ) {
 
     fun toDto() = GuestDto(
