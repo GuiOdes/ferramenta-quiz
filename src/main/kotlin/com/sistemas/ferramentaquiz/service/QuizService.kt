@@ -27,4 +27,9 @@ class QuizService(
     }
 
     fun generateAcessCode(): String = RandomStringUtils.secure().nextAlphanumeric(7);
+
+    fun findAllUserQuizzes(email: String): List<QuizDto>{
+        val user = userRepository.findByEmail(email) ?: throw UserNotFoundException()
+        return repository.findAllByUser(user).map { it.toDto() }
+    }
 }
