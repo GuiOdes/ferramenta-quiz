@@ -2,6 +2,7 @@ package com.sistemas.ferramentaquiz.api.controller
 
 import com.sistemas.ferramentaquiz.api.request.CreateQuizRequest
 import com.sistemas.ferramentaquiz.api.request.GuestOnQuizRequest
+import com.sistemas.ferramentaquiz.api.request.PlusScoreRequest
 import com.sistemas.ferramentaquiz.service.GuestService
 import com.sistemas.ferramentaquiz.service.JwtService
 import com.sistemas.ferramentaquiz.service.QuizService
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
@@ -40,4 +42,10 @@ class QuizController(
         @RequestHeader("Authorization") token: String,
         @RequestBody guestOnQuizRequest: GuestOnQuizRequest
     ) = guestService.removeGuest(guestOnQuizRequest, jwtService.extractUsername(token))
+
+    @PutMapping("/plusSCore")
+    fun plusScore(
+        @RequestHeader("Authorization") token: String,
+        @RequestBody scoreRequest: PlusScoreRequest
+    ) = service.plusScore(scoreRequest, jwtService.extractUsername(token))
 }
