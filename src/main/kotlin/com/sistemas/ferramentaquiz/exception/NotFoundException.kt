@@ -1,5 +1,6 @@
-package com.guiodes.dizimum.domain.exception
+package com.sistemas.ferramentaquiz.exception
 
+import com.guiodes.dizimum.domain.exception.BaseRuntimeException
 import kotlin.reflect.KClass
 
 class NotFoundException(

@@ -1,12 +1,12 @@
 package com.sistemas.ferramentaquiz.service
 
 import com.guiodes.dizimum.domain.exception.ForbiddenException
-import com.guiodes.dizimum.domain.exception.NotFoundException
 import com.sistemas.ferramentaquiz.api.request.AuthenticationRequest
 import com.sistemas.ferramentaquiz.api.request.CreateUserRequest
 import com.sistemas.ferramentaquiz.api.response.AuthenticationResponse
 import com.sistemas.ferramentaquiz.database.repository.UserRepository
 import com.sistemas.ferramentaquiz.dto.UserDto
+import com.sistemas.ferramentaquiz.exception.NotFoundException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
