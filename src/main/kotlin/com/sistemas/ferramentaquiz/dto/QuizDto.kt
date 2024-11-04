@@ -8,13 +8,15 @@ class QuizDto(
     val title: String,
     val code: String,
     val isDone: Boolean,
-    val user: UserEntity
+    val user: UserEntity,
+    val guests: List<GuestDto> = emptyList()
 ) {
     fun toEntity() = QuizEntity(
         id = id,
         title = title,
         code = code,
         isDone = isDone,
-        user = user
+        user = user,
+        guests = guests.map { it.toEntity() }.toMutableList()
     )
 }
