@@ -2,9 +2,9 @@ package com.sistemas.ferramentaquiz.api.exception
 
 import com.guiodes.dizimum.domain.exception.BadRequestException
 import com.guiodes.dizimum.domain.exception.ForbiddenException
-import com.guiodes.dizimum.domain.exception.NotFoundException
 import com.sistemas.ferramentaquiz.api.response.ErrorResponse
 import com.sistemas.ferramentaquiz.api.response.FieldErrorResponse
+import com.sistemas.ferramentaquiz.exception.NotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler

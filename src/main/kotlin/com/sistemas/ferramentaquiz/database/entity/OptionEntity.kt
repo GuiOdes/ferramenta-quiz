@@ -1,5 +1,6 @@
 package com.sistemas.ferramentaquiz.database.entity
 
+import com.sistemas.ferramentaquiz.dto.OptionDto
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -19,4 +20,12 @@ class OptionEntity(
     val isRight: Boolean,
     @ManyToOne
     val question: QuestionEntity
-)
+) {
+
+    fun toDto() = OptionDto(
+        id = id,
+        description = description,
+        isRight = isRight,
+        question = question.toDto()
+    )
+}

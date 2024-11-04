@@ -1,9 +1,11 @@
 package com.sistemas.ferramentaquiz.database.entity
 
+import com.sistemas.ferramentaquiz.dto.QuestionDto
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.ManyToOne
 import jakarta.persistence.SequenceGenerator
 import jakarta.persistence.Table
 
@@ -16,6 +18,14 @@ class QuestionEntity(
     val id: Long? = null,
     val title: String,
     val description: String,
-    //@ManyToOne
-    //val quiz: QuizEntity
-)
+    @ManyToOne
+    val quiz: QuizEntity
+) {
+
+    fun toDto() = QuestionDto(
+        id = id,
+        title = title,
+        description = description,
+        quiz = quiz.toDto()
+    )
+}
