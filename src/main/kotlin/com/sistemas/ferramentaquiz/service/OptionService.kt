@@ -1,5 +1,6 @@
 package com.sistemas.ferramentaquiz.service
 
+import com.guiodes.dizimum.domain.exception.BadRequestException
 import com.sistemas.ferramentaquiz.api.request.CreateOptionRequest
 import com.sistemas.ferramentaquiz.database.repository.OptionRepository
 import com.sistemas.ferramentaquiz.database.repository.QuestionRepository
@@ -17,6 +18,12 @@ class OptionService(
     fun save(option: CreateOptionRequest): OptionDto {
         val question = questionRepository.findById(option.questionId)
             ?: throw NotFoundException(Question::class)
+
+        optionRepository.findAllByQuestionId(question.id!!).firstOrNull { it.isRight }?.also {
+            if (option.isRight) {
+                throw BadRequestException("Question already has a right option")
+            }
+        }
 
         return optionRepository.save(option.toDto(question))
     }

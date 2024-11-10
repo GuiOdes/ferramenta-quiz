@@ -1,7 +1,6 @@
 package com.sistemas.ferramentaquiz.api.request
 
 import com.sistemas.ferramentaquiz.dto.QuestionDto
-import com.sistemas.ferramentaquiz.dto.QuizDto
 import jakarta.validation.constraints.NotBlank
 
 data class CreateQuestionRequest(
@@ -13,9 +12,9 @@ data class CreateQuestionRequest(
     val quizId: Long
 ) {
 
-    fun toDto(quiz: QuizDto) = QuestionDto(
+    fun toDto(quizId: Long) = QuestionDto(
         title = title,
         description = description,
-        quiz = quiz
+        quizId = quizId
     )
 }

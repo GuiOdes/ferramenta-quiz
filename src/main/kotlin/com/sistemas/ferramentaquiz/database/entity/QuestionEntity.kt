@@ -10,7 +10,7 @@ import jakarta.persistence.SequenceGenerator
 import jakarta.persistence.Table
 
 @Entity
-@Table
+@Table(name = "question")
 class QuestionEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "question_seq")
@@ -26,6 +26,6 @@ class QuestionEntity(
         id = id,
         title = title,
         description = description,
-        quiz = quiz.toDto()
+        quizId = quiz.id!!
     )
 }

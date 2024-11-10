@@ -1,5 +1,6 @@
 package com.sistemas.ferramentaquiz.service
 
+import com.guiodes.dizimum.domain.exception.BadRequestException
 import com.guiodes.dizimum.domain.exception.ForbiddenException
 import com.sistemas.ferramentaquiz.api.request.AuthenticationRequest
 import com.sistemas.ferramentaquiz.api.request.CreateUserRequest
@@ -18,6 +19,10 @@ class UserService(
     private val jwtService: JwtService
 ) {
     fun save(request: CreateUserRequest) {
+        userRepository.findByEmail(request.email)?.also {
+            throw BadRequestException("User with this email already exists!")
+        }
+
         val encodedPasswordUser = request.copy(
             password = passwordEncoder.encode(request.password)
         ).toDto()

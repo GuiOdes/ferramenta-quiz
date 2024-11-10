@@ -10,7 +10,7 @@ import jakarta.persistence.SequenceGenerator
 import jakarta.persistence.Table
 
 @Entity
-@Table
+@Table(name = "option")
 class OptionEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "option_seq")
@@ -26,6 +26,6 @@ class OptionEntity(
         id = id,
         description = description,
         isRight = isRight,
-        question = question.toDto()
+        questionId = question.id!!
     )
 }

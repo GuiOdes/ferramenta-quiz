@@ -2,12 +2,11 @@ package com.sistemas.ferramentaquiz.service
 
 import com.guiodes.dizimum.domain.exception.ForbiddenException
 import com.sistemas.ferramentaquiz.api.request.CreateQuizRequest
-import com.sistemas.ferramentaquiz.api.request.GuestOnQuizRequest
 import com.sistemas.ferramentaquiz.api.request.PlusScoreRequest
+import com.sistemas.ferramentaquiz.api.response.QuizRankingResponse
 import com.sistemas.ferramentaquiz.database.repository.GuestRepository
 import com.sistemas.ferramentaquiz.database.repository.QuizRepository
 import com.sistemas.ferramentaquiz.database.repository.UserRepository
-import com.sistemas.ferramentaquiz.dto.GuestDto
 import com.sistemas.ferramentaquiz.dto.QuizDto
 import com.sistemas.ferramentaquiz.dto.UserDto
 import com.sistemas.ferramentaquiz.exception.NotFoundException
@@ -29,7 +28,7 @@ class QuizService(
 
         val dto = QuizDto(
             title = request.title,
-            user = user.toEntity(),
+            user = user,
             code = code,
             isDone = false
         )
@@ -37,9 +36,9 @@ class QuizService(
         repository.save(dto)
     }
 
-    fun generateAccessCode(): String = RandomStringUtils.secure().nextAlphanumeric(accessCodeLength)
+    fun generateAccessCode(): String = RandomStringUtils.secure().nextAlphanumeric(accessCodeLength).uppercase()
 
-    fun findAllByUserEmail(userEmail: String) = repository.findAllByUserId(userEmail)
+    fun findAllByUserEmail(userEmail: String) = repository.findAllByUserId(userEmail).map { it.toResponse() }
 
     fun plusScore(scoreRequest: PlusScoreRequest, userEmail: String) {
         val quiz = repository.findByCode(scoreRequest.quizCode) ?: throw NotFoundException(QuizDto::class)
@@ -49,6 +48,19 @@ class QuizService(
         }
 
         guestRepository.plusScore(scoreRequest)
+    }
+
+    fun findRanking(quizCode: String): QuizRankingResponse {
+        val quiz = repository.findByCode(quizCode) ?: throw NotFoundException(QuizDto::class)
+
+        val guestRanking = quiz.guests.sortedByDescending { it.score }.mapIndexed { index, guest ->
+            guest.toRankingResponse(index + 1)
+        }
+
+        return QuizRankingResponse(
+            guestRanking = guestRanking,
+            winner = guestRanking.last()
+        )
     }
 
     fun isUserOwnerOfQuiz(quizDto: QuizDto, userEmail: String): Boolean {

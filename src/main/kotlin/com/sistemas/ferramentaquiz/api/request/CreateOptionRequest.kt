@@ -15,6 +15,6 @@ data class CreateOptionRequest(
     fun toDto(question: QuestionDto) = OptionDto(
         description = description,
         isRight = isRight,
-        question = question
+        questionId = question.id!!
     )
 }

@@ -32,7 +32,10 @@ class SecurityConfig(
     companion object {
         private val WHITE_LIST = arrayOf(
             "/user/new",
-            "/login"
+            "/login",
+            "/guest/**",
+            "/swagger-ui/**",
+            "/v3/**"
         )
     }
 }

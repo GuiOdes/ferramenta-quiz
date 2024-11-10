@@ -44,6 +44,7 @@ dependencies {
 
 	implementation("org.apache.commons:commons-lang3:3.17.0")
 
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
 }
 
 kotlin {

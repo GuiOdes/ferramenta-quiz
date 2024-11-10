@@ -1,5 +1,6 @@
 package com.sistemas.ferramentaquiz.dto
 
+import com.sistemas.ferramentaquiz.api.response.GuestRankingResponse
 import com.sistemas.ferramentaquiz.database.entity.GuestEntity
 
 data class GuestDto(
@@ -14,5 +15,11 @@ data class GuestDto(
         name = name,
         ip = ip,
         score = score
+    )
+
+    fun toRankingResponse(position: Int) = GuestRankingResponse(
+        guestName = name,
+        score = score,
+        position = position
     )
 }

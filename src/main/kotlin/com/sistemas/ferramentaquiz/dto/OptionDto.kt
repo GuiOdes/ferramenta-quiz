@@ -1,18 +1,19 @@
 package com.sistemas.ferramentaquiz.dto
 
 import com.sistemas.ferramentaquiz.database.entity.OptionEntity
+import com.sistemas.ferramentaquiz.database.entity.QuestionEntity
 
 data class OptionDto(
     val id: Long? = null,
     val description: String,
     val isRight: Boolean,
-    val question: QuestionDto
+    val questionId: Long
 ) {
 
-    fun toEntity() = OptionEntity(
+    fun toEntity(questionEntity: QuestionEntity) = OptionEntity(
         id = id,
         description = description,
         isRight = isRight,
-        question = question.toEntity()
+        question = questionEntity
     )
 }

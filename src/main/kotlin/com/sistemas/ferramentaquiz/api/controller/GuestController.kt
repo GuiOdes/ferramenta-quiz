@@ -4,7 +4,6 @@ import com.sistemas.ferramentaquiz.api.request.CreateGuestRequest
 import com.sistemas.ferramentaquiz.api.request.GuestOnQuizRequest
 import com.sistemas.ferramentaquiz.service.GuestService
 import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -21,9 +20,6 @@ class GuestController(
     @ResponseStatus(HttpStatus.CREATED)
     fun save(@RequestBody request: CreateGuestRequest) = guestService.save(request)
 
-    @GetMapping
-    fun findAll() = guestService.findAll()
-
-    @PostMapping("/join/{quizCode}")
+    @PostMapping("/join")
     fun joinQuiz(@RequestBody request: GuestOnQuizRequest) = guestService.joinInQuiz(request)
 }
