@@ -2,9 +2,18 @@ spring:
   application:
     name: Quiz
   datasource:
-    url: jdbc:postgresql://localhost:5432/quiz
-    username: root
-    password: root
+#    url: ${DATABASE_URL:jdbc:postgresql://167.88.33.180:3090/postgresql_16}
+#    username: ${DATABASE_USERBAME:postgres}
+#    password: ${DATABASE_PASSWORD:cc48628968f7a2f7440e}
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    url: jdbc:h2:mem:~/test
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
 
 security-configurations:
   jwt:
