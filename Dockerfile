@@ -10,7 +10,7 @@ COPY gradle ./gradle
 COPY src ./src
 
 # Realiza o build da aplicação
-RUN ./gradlew clean build -x test
+RUN ./gradlew clean build -x test -x detekt
 
 # Etapa 2: Criação da imagem final
 FROM eclipse-temurin:17-jre
