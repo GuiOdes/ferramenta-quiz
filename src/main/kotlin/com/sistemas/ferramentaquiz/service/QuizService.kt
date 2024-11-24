@@ -8,6 +8,7 @@ import com.sistemas.ferramentaquiz.database.repository.GuestRepository
 import com.sistemas.ferramentaquiz.database.repository.QuizRepository
 import com.sistemas.ferramentaquiz.database.repository.UserRepository
 import com.sistemas.ferramentaquiz.dto.QuizDto
+import com.sistemas.ferramentaquiz.dto.QuizStatus
 import com.sistemas.ferramentaquiz.dto.UserDto
 import com.sistemas.ferramentaquiz.exception.NotFoundException
 import org.apache.commons.lang3.RandomStringUtils
@@ -30,7 +31,7 @@ class QuizService(
             title = request.title,
             user = user,
             code = code,
-            isDone = false
+            status = QuizStatus.WAITING_GUESTS
         )
 
         repository.save(dto)
@@ -66,4 +67,6 @@ class QuizService(
     fun isUserOwnerOfQuiz(quizDto: QuizDto, userEmail: String): Boolean {
         return quizDto.user.email == userEmail
     }
+
+    fun findByCode(code: String) = repository.findByCode(code)
 }

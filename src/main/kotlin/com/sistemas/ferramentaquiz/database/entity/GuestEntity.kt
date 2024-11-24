@@ -17,13 +17,15 @@ class GuestEntity(
     val id: Long? = null,
     val name: String,
     val ip: String,
-    var score: Int = 0
+    var score: Int = 0,
+    val profileUrl: String
 ) {
 
     fun toDto() = GuestDto(
         id = id,
         name = name,
         ip = ip,
-        score = score
+        score = score,
+        profileUrl = profileUrl
     )
 }

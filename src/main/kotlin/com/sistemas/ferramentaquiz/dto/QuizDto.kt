@@ -7,7 +7,7 @@ class QuizDto(
     val id: Long? = null,
     val title: String,
     val code: String,
-    val isDone: Boolean,
+    val status: QuizStatus,
     val user: UserDto,
     val guests: List<GuestDto> = emptyList(),
     val questions: List<QuestionDto> = emptyList()
@@ -16,18 +16,18 @@ class QuizDto(
         id = id,
         title = title,
         code = code,
-        isDone = isDone,
         user = user.toEntity(),
-        guests = guests.map { it.toEntity() }.toMutableSet()
+        guests = guests.map { it.toEntity() }.toMutableSet(),
+        status = status
     )
 
     fun toResponse() = QuizResponse(
         id = id,
         title = title,
         code = code,
-        isDone = isDone,
         user = user.toResponse(),
         guests = guests,
-        questions = questions.map { it.toResponse() }
+        questions = questions.map { it.toResponse() },
+        status = status
     )
 }

@@ -7,14 +7,16 @@ data class GuestDto(
     val id: Long? = null,
     val name: String,
     val ip: String,
-    val score: Int = 0
+    val score: Int = 0,
+    val profileUrl: String
 ) {
 
     fun toEntity() = GuestEntity(
         id = id,
         name = name,
         ip = ip,
-        score = score
+        score = score,
+        profileUrl = profileUrl
     )
 
     fun toRankingResponse(position: Int) = GuestRankingResponse(

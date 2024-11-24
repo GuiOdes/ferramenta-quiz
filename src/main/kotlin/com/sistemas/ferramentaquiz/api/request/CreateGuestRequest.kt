@@ -8,10 +8,14 @@ data class CreateGuestRequest(
     val name: String,
 
     @field:NotBlank(message = "IP is required")
-    val ip: String
+    val ip: String,
+
+    @field:NotBlank(message = "Profile URL is required")
+    val profileUrl: String
 ) {
     fun toDto() = GuestDto(
         name = name,
-        ip = ip
+        ip = ip,
+        profileUrl = profileUrl
     )
 }

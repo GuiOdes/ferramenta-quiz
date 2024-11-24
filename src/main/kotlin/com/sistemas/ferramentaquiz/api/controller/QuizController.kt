@@ -39,6 +39,11 @@ class QuizController(
         @RequestHeader("Authorization") token: String
     ) = service.findAllByUserEmail(jwtService.extractUsername(token))
 
+    @GetMapping("/code/{code}")
+    fun findByCode(
+        @PathVariable code: String
+    ) = service.findByCode(code)
+
     @DeleteMapping("/guest")
     fun deleteGuest(
         @RequestHeader("Authorization") token: String,
