@@ -3,7 +3,7 @@ package com.sistemas.ferramentaquiz.dto
 import com.sistemas.ferramentaquiz.api.response.QuizResponse
 import com.sistemas.ferramentaquiz.database.entity.QuizEntity
 
-class QuizDto(
+data class QuizDto(
     val id: Long? = null,
     val title: String,
     val code: String,

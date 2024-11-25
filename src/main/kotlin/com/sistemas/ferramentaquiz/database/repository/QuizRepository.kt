@@ -37,7 +37,7 @@ class QuizRepository(
         repository.save(quiz)
     }
 
-    fun addGuest(guestOnQuizRequest: GuestOnQuizRequest) {
+    fun addGuest(guestOnQuizRequest: GuestOnQuizRequest): QuizEntity {
         val quiz = repository.findActiveByCode(guestOnQuizRequest.quizCode)
             ?: throw NotFoundException(QuizEntity::class)
         val guest = guestSpringDataRepository.findById(guestOnQuizRequest.guestId).getOrNull()
@@ -49,6 +49,6 @@ class QuizRepository(
 
         quiz.guests.add(guest)
 
-        repository.save(quiz)
+        return repository.save(quiz)
     }
 }

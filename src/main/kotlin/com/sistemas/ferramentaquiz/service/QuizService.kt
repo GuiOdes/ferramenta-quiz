@@ -3,7 +3,9 @@ package com.sistemas.ferramentaquiz.service
 import com.guiodes.dizimum.domain.exception.ForbiddenException
 import com.sistemas.ferramentaquiz.api.request.CreateQuizRequest
 import com.sistemas.ferramentaquiz.api.request.PlusScoreRequest
+import com.sistemas.ferramentaquiz.api.request.UpdateQuizRequest
 import com.sistemas.ferramentaquiz.api.response.QuizRankingResponse
+import com.sistemas.ferramentaquiz.database.entity.QuizEntity
 import com.sistemas.ferramentaquiz.database.repository.GuestRepository
 import com.sistemas.ferramentaquiz.database.repository.QuizRepository
 import com.sistemas.ferramentaquiz.database.repository.UserRepository
@@ -69,4 +71,19 @@ class QuizService(
     }
 
     fun findByCode(code: String) = repository.findByCode(code)
+
+    fun update(request: UpdateQuizRequest, email: String): QuizEntity {
+        val quiz = repository.findById(request.id) ?: throw NotFoundException(QuizDto::class)
+
+        if (!isUserOwnerOfQuiz(quiz, email)) {
+            throw ForbiddenException("User is not the owner of the quiz")
+        }
+
+        val quizAfterUpdate = quiz.copy(
+            title = request.title ?: quiz.title,
+            status = request.status ?: quiz.status
+        )
+
+        return repository.save(quizAfterUpdate)
+    }
 }

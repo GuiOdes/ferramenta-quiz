@@ -3,6 +3,8 @@ package com.sistemas.ferramentaquiz.api.controller
 import com.sistemas.ferramentaquiz.api.request.CreateQuizRequest
 import com.sistemas.ferramentaquiz.api.request.GuestOnQuizRequest
 import com.sistemas.ferramentaquiz.api.request.PlusScoreRequest
+import com.sistemas.ferramentaquiz.api.request.UpdateQuizRequest
+import com.sistemas.ferramentaquiz.database.entity.QuizEntity
 import com.sistemas.ferramentaquiz.service.GuestService
 import com.sistemas.ferramentaquiz.service.JwtService
 import com.sistemas.ferramentaquiz.service.QuizService
@@ -32,6 +34,12 @@ class QuizController(
     fun save(@RequestBody request: CreateQuizRequest, @RequestHeader("Authorization") token: String) {
         val email = jwtService.extractUsername(token)
         service.save(request, email)
+    }
+
+    @PutMapping
+    fun update(@RequestBody request: UpdateQuizRequest, @RequestHeader("Authorization") token: String): QuizEntity {
+        val email = jwtService.extractUsername(token)
+        return service.update(request, email)
     }
 
     @GetMapping
