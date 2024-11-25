@@ -9,6 +9,9 @@ COPY build.gradle.kts settings.gradle.kts gradlew ./
 COPY gradle ./gradle
 COPY src ./src
 
+# Permissão de execução para o script gradlew
+RUN chmod +x ./gradlew
+
 # Realiza o build da aplicação
 RUN ./gradlew clean build -x test -x detekt
 
