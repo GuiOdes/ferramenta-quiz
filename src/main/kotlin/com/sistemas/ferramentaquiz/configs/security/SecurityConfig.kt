@@ -23,7 +23,7 @@ class SecurityConfig(
         .authorizeHttpRequests {
             it
                 .requestMatchers(*WHITE_LIST).permitAll()
-                .requestMatchers(HttpMethod.GET).permitAll()
+                .requestMatchers(HttpMethod.GET, "/**").permitAll()
                 .anyRequest().authenticated()
         }
         .sessionManagement { it.sessionCreationPolicy(STATELESS) }
