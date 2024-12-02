@@ -23,7 +23,6 @@ class SecurityConfig(
         .authorizeHttpRequests {
             it
                 .requestMatchers(*WHITE_LIST).permitAll()
-                .requestMatchers(HttpMethod.GET, "/**").permitAll()
                 .anyRequest().authenticated()
         }
         .sessionManagement { it.sessionCreationPolicy(STATELESS) }
@@ -37,7 +36,8 @@ class SecurityConfig(
             "/login",
             "/guest/**",
             "/swagger-ui/**",
-            "/v3/**"
+            "/v3/**",
+            "/quiz/code/**",
         )
     }
 }
