@@ -18,7 +18,7 @@ spring:
 security-configurations:
   jwt:
     secret: ${JWT_SECRET:/g0lkq/qOxZ3tXv4CVOkYSJVoRc3WVpTHDRTgM8QDaKS/5kihyUg2JaBrDyODHal}
-    expiration: 720000
+    expiration: 720000000000
 
 access:
   code:

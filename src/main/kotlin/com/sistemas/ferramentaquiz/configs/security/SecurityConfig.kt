@@ -2,6 +2,7 @@ package com.sistemas.ferramentaquiz.configs.security
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
@@ -22,6 +23,7 @@ class SecurityConfig(
         .authorizeHttpRequests {
             it
                 .requestMatchers(*WHITE_LIST).permitAll()
+                .requestMatchers(HttpMethod.GET).permitAll()
                 .anyRequest().authenticated()
         }
         .sessionManagement { it.sessionCreationPolicy(STATELESS) }
