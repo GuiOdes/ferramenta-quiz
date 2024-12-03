@@ -60,9 +60,8 @@ class QuizController(
 
     @PutMapping("/score/plus")
     fun plusScore(
-        @RequestHeader("Authorization") token: String,
         @Validated @RequestBody scoreRequest: PlusScoreRequest
-    ) = service.plusScore(scoreRequest, jwtService.extractUsername(token))
+    ) = service.plusScore(scoreRequest)
 
     @GetMapping("/ranking/{quizCode}")
     fun ranking(

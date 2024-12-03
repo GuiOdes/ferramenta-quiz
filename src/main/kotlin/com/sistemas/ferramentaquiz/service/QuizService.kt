@@ -43,15 +43,7 @@ class QuizService(
 
     fun findAllByUserEmail(userEmail: String) = repository.findAllByUserId(userEmail).map { it.toResponse() }
 
-    fun plusScore(scoreRequest: PlusScoreRequest, userEmail: String) {
-        val quiz = repository.findByCode(scoreRequest.quizCode) ?: throw NotFoundException(QuizDto::class)
-
-        if (!isUserOwnerOfQuiz(quiz, userEmail)) {
-            throw ForbiddenException("User is not the owner of the quiz")
-        }
-
-        guestRepository.plusScore(scoreRequest)
-    }
+    fun plusScore(scoreRequest: PlusScoreRequest) = guestRepository.plusScore(scoreRequest)
 
     fun findRanking(quizCode: String): QuizRankingResponse {
         val quiz = repository.findByCode(quizCode) ?: throw NotFoundException(QuizDto::class)
