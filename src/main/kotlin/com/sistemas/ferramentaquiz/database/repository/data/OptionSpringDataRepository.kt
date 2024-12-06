@@ -7,7 +7,4 @@ import org.springframework.data.jpa.repository.Query
 interface OptionSpringDataRepository : JpaRepository<OptionEntity, Long> {
 
     fun findAllByQuestionId(questionId: Long): List<OptionEntity>
-
-    @Query("update OptionEntity o set o.hitCount = o.hitCount + 1 where o.id = :id")
-    fun sumCountById(id: Long)
 }

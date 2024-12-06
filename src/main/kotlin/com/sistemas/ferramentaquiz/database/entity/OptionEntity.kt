@@ -11,7 +11,7 @@ import jakarta.persistence.Table
 
 @Entity
 @Table(name = "option")
-class OptionEntity(
+data class OptionEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "option_seq")
     @SequenceGenerator(name = "option_seq", sequenceName = "option_seq", allocationSize = 1)

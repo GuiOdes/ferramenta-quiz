@@ -27,7 +27,9 @@ class OptionRepository(
 
     fun sumCountByIds(ids: List<Long>) {
         ids.forEach {
-            dataRepository.sumCountById(it)
+            dataRepository.findByIdOrNull(it)?.also { option ->
+                dataRepository.save(option.copy(hitCount = option.hitCount++))
+            }
         }
     }
 }
