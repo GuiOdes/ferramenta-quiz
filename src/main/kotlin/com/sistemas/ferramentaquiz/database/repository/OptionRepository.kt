@@ -26,6 +26,8 @@ class OptionRepository(
     }
 
     fun sumCountByIds(ids: List<Long>) {
-        dataRepository.sumCountByIds(ids)
+        ids.forEach {
+            dataRepository.sumCountById(it)
+        }
     }
 }
