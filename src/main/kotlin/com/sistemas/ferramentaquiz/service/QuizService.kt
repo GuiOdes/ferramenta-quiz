@@ -25,7 +25,7 @@ class QuizService(
     private val accessCodeLength: Int,
     private val guestRepository: GuestRepository
 ) {
-    fun save(request: CreateQuizRequest, userEmail: String) {
+    fun save(request: CreateQuizRequest, userEmail: String): QuizDto {
         val user = userRepository.findByEmail(userEmail) ?: throw NotFoundException(UserDto::class)
         val code = generateAccessCode()
 
@@ -36,7 +36,7 @@ class QuizService(
             status = QuizStatus.WAITING_GUESTS
         )
 
-        repository.save(dto)
+        return repository.save(dto).toDto()
     }
 
     fun generateAccessCode(): String = RandomStringUtils.secure().nextAlphanumeric(accessCodeLength).uppercase()

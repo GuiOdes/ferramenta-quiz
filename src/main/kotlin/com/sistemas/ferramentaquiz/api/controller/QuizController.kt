@@ -5,6 +5,7 @@ import com.sistemas.ferramentaquiz.api.request.GuestOnQuizRequest
 import com.sistemas.ferramentaquiz.api.request.PlusScoreRequest
 import com.sistemas.ferramentaquiz.api.request.UpdateQuizRequest
 import com.sistemas.ferramentaquiz.database.entity.QuizEntity
+import com.sistemas.ferramentaquiz.dto.QuizDto
 import com.sistemas.ferramentaquiz.service.GuestService
 import com.sistemas.ferramentaquiz.service.JwtService
 import com.sistemas.ferramentaquiz.service.QuizService
@@ -31,9 +32,9 @@ class QuizController(
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun save(@RequestBody request: CreateQuizRequest, @RequestHeader("Authorization") token: String) {
+    fun save(@RequestBody request: CreateQuizRequest, @RequestHeader("Authorization") token: String): QuizDto {
         val email = jwtService.extractUsername(token)
-        service.save(request, email)
+        return service.save(request, email)
     }
 
     @PutMapping
