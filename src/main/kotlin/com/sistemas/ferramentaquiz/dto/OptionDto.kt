@@ -7,7 +7,8 @@ data class OptionDto(
     val id: Long? = null,
     val description: String,
     val isRight: Boolean,
-    val questionId: Long
+    val questionId: Long,
+    var hitCount: Long = 0
 ) {
 
     fun toEntity(questionEntity: QuestionEntity) = OptionEntity(

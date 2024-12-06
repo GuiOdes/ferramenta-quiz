@@ -24,4 +24,8 @@ class OptionRepository(
     fun findAllByQuestionId(questionId: Long): List<OptionDto> {
         return dataRepository.findAllByQuestionId(questionId).map { it.toDto() }
     }
+
+    fun sumCountByIds(ids: List<Long>) {
+        dataRepository.sumCountByIds(ids)
+    }
 }
