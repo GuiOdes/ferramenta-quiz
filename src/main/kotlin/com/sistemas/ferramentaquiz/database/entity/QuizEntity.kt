@@ -1,8 +1,11 @@
 package com.sistemas.ferramentaquiz.database.entity
 
 import com.sistemas.ferramentaquiz.dto.QuizDto
+import com.sistemas.ferramentaquiz.dto.QuizStatus
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
 import jakarta.persistence.FetchType
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -30,7 +33,6 @@ class QuizEntity(
     val id: Long? = null,
     val title: String,
     val code: String,
-    val isDone: Boolean,
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     val user: UserEntity,
@@ -48,15 +50,17 @@ class QuizEntity(
         mappedBy = "quiz",
         fetch = FetchType.LAZY
     )
-    val questions: MutableSet<QuestionEntity> = mutableSetOf()
+    val questions: MutableSet<QuestionEntity> = mutableSetOf(),
+    @Enumerated(EnumType.STRING)
+    val status: QuizStatus
 ) {
     fun toDto() = QuizDto(
         id = id,
         title = title,
         code = code,
-        isDone = isDone,
         user = user.toDto(),
         guests = guests.map { it.toDto() },
-        questions = questions.map { it.toDto() }
+        questions = questions.map { it.toDto() },
+        status = status
     )
 }

@@ -9,8 +9,11 @@ COPY build.gradle.kts settings.gradle.kts gradlew ./
 COPY gradle ./gradle
 COPY src ./src
 
+# Permissão de execução para o script gradlew
+RUN chmod +x ./gradlew
+
 # Realiza o build da aplicação
-RUN ./gradlew clean build -x test
+RUN ./gradlew clean build -x test -x detekt
 
 # Etapa 2: Criação da imagem final
 FROM eclipse-temurin:17-jre

@@ -11,7 +11,7 @@ import jakarta.persistence.Table
 
 @Entity
 @Table(name = "option")
-class OptionEntity(
+data class OptionEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "option_seq")
     @SequenceGenerator(name = "option_seq", sequenceName = "option_seq", allocationSize = 1)
@@ -19,13 +19,15 @@ class OptionEntity(
     val description: String,
     val isRight: Boolean,
     @ManyToOne
-    val question: QuestionEntity
+    val question: QuestionEntity,
+    var hitCount: Long = 0
 ) {
 
     fun toDto() = OptionDto(
         id = id,
         description = description,
         isRight = isRight,
-        questionId = question.id!!
+        questionId = question.id!!,
+        hitCount = hitCount
     )
 }

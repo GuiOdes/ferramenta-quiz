@@ -24,4 +24,12 @@ class OptionRepository(
     fun findAllByQuestionId(questionId: Long): List<OptionDto> {
         return dataRepository.findAllByQuestionId(questionId).map { it.toDto() }
     }
+
+    fun sumCountByIds(ids: List<Long>) {
+        ids.forEach {
+            dataRepository.findByIdOrNull(it)?.also { option ->
+                dataRepository.save(option.copy(hitCount = option.hitCount++))
+            }
+        }
+    }
 }

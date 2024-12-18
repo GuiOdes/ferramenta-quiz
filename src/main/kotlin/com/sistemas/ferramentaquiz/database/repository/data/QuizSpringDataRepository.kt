@@ -9,8 +9,6 @@ interface QuizSpringDataRepository : JpaRepository<QuizEntity, Long> {
 
     @EntityGraph(value = "QuizEntity.graph", type = EntityGraph.EntityGraphType.FETCH)
     fun findAllByUserEmail(email: String): List<QuizEntity>
-    @Query("SELECT q FROM QuizEntity q WHERE q.code = :code AND q.isDone = false")
+    @Query("SELECT q FROM QuizEntity q WHERE q.code = :code")
     fun findActiveByCode(code: String): QuizEntity?
-
-    fun findByQuestionsId(questionId: Long): QuizEntity?
 }

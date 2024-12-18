@@ -2,6 +2,7 @@ package com.sistemas.ferramentaquiz.database.repository.data
 
 import com.sistemas.ferramentaquiz.database.entity.OptionEntity
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.jpa.repository.Query
 
 interface OptionSpringDataRepository : JpaRepository<OptionEntity, Long> {
 

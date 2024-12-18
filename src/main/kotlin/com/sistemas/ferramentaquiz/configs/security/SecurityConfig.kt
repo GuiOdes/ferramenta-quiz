@@ -19,23 +19,20 @@ class SecurityConfig(
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain? = http
         .csrf { it.disable() }
-        .authorizeHttpRequests {
-            it
-                .requestMatchers(*WHITE_LIST).permitAll()
-                .anyRequest().authenticated()
-        }
+        .authorizeHttpRequests { it.anyRequest().permitAll() }
         .sessionManagement { it.sessionCreationPolicy(STATELESS) }
         .authenticationProvider(authenticationProvider)
         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
         .build()
 
-    companion object {
-        private val WHITE_LIST = arrayOf(
-            "/user/new",
-            "/login",
-            "/guest/**",
-            "/swagger-ui/**",
-            "/v3/**"
-        )
-    }
+//    companion object {
+//        private val WHITE_LIST = arrayOf(
+//            "/user/new",
+//            "/login",
+//            "/guest/**",
+//            "/swagger-ui/**",
+//            "/v3/**",
+//            "/quiz/code/**",
+//        )
+//    }
 }

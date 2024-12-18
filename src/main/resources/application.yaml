@@ -1,7 +1,11 @@
 spring:
   application:
     name: Quiz
+<<<<<<< HEAD
   #datasource:
+=======
+#  datasource:
+>>>>>>> origin/main
 #    url: ${DATABASE_URL:jdbc:postgresql://167.88.33.180:3090/postgresql_16}
 #    username: ${DATABASE_USERBAME:postgres}
 #    password: ${DATABASE_PASSWORD:cc48628968f7a2f7440e}
@@ -18,7 +22,7 @@ spring:
 security-configurations:
   jwt:
     secret: ${JWT_SECRET:/g0lkq/qOxZ3tXv4CVOkYSJVoRc3WVpTHDRTgM8QDaKS/5kihyUg2JaBrDyODHal}
-    expiration: 720000
+    expiration: 720000000000
 
 access:
   code:

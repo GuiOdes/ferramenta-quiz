@@ -2,6 +2,7 @@ package com.sistemas.ferramentaquiz.service
 
 import com.guiodes.dizimum.domain.exception.BadRequestException
 import com.sistemas.ferramentaquiz.api.request.CreateOptionRequest
+import com.sistemas.ferramentaquiz.api.request.SumHitOptionRequest
 import com.sistemas.ferramentaquiz.database.repository.OptionRepository
 import com.sistemas.ferramentaquiz.database.repository.QuestionRepository
 import com.sistemas.ferramentaquiz.dto.OptionDto
@@ -30,5 +31,9 @@ class OptionService(
 
     fun findAllByQuestionId(questionId: Long): List<OptionDto> {
         return optionRepository.findAllByQuestionId(questionId)
+    }
+
+    fun sumCount(sumHitOptionRequest: SumHitOptionRequest) {
+        optionRepository.sumCountByIds(sumHitOptionRequest.ids)
     }
 }
