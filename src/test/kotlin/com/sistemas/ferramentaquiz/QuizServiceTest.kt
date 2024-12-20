@@ -4,6 +4,7 @@ import com.sistemas.ferramentaquiz.database.repository.QuizRepository
 import com.sistemas.ferramentaquiz.database.repository.UserRepository
 
 import com.sistemas.ferramentaquiz.dto.QuizDto
+import com.sistemas.ferramentaquiz.dto.QuizStatus
 import com.sistemas.ferramentaquiz.dto.UserDto
 import com.sistemas.ferramentaquiz.service.GuestService
 import com.sistemas.ferramentaquiz.service.JwtService
@@ -46,11 +47,20 @@ class QuizServiceTest {
         val userEmail = userDto.email
         val request = CreateQuizRequest(title = "Quiz Test")
         val generatedCode = "ABC123"
+        val quizDto = QuizDto(
+            id = 1,
+            title = request.title,
+            code = generatedCode,
+            status = QuizStatus.WAITING_GUESTS,
+            user = userDto,
+            guests = emptyList(),
+            questions = emptyList()
+        )
 
         // Mock do comportamento esperado
         every { jwtService.extractUsername(token) } returns userEmail
         every { service.generateAccessCode() } returns generatedCode
-        every { service.save(request, userEmail) } just runs
+        every { service.save(request, userEmail) } returns quizDto
 
         // Act: Executa o método do controller
         controller.save(request, token)

@@ -8,6 +8,7 @@ import com.sistemas.ferramentaquiz.database.repository.QuizRepository
 import com.sistemas.ferramentaquiz.database.repository.UserRepository
 import com.sistemas.ferramentaquiz.dto.QuestionDto
 import com.sistemas.ferramentaquiz.dto.QuizDto
+import com.sistemas.ferramentaquiz.dto.QuizStatus
 import com.sistemas.ferramentaquiz.dto.UserDto
 import com.sistemas.ferramentaquiz.exception.NotFoundException
 import com.sistemas.ferramentaquiz.service.JwtService
@@ -56,7 +57,7 @@ class QuestionServiceTest {
         id = validQuizId,
         title = "Valid Quiz",
         code = "ABC123",
-        isDone = false,
+        status = QuizStatus.IN_PROGRESS,
         user = userDto,
         guests = emptyList(),
         questions = emptyList()

@@ -7,6 +7,7 @@ import com.sistemas.ferramentaquiz.service.GuestService
 import com.sistemas.ferramentaquiz.database.repository.GuestRepository
 import com.sistemas.ferramentaquiz.database.repository.QuizRepository
 import com.sistemas.ferramentaquiz.dto.QuizDto
+import com.sistemas.ferramentaquiz.dto.QuizStatus
 import com.sistemas.ferramentaquiz.dto.UserDto
 import io.mockk.every
 import io.mockk.verify
@@ -46,7 +47,7 @@ class GuestServiceTest {
         id = validQuizId,
         title = "Valid Quiz",
         code = "ABC123",
-        isDone = false,
+        status = QuizStatus.IN_PROGRESS,
         user = userDto,
         guests = emptyList(),
         questions = emptyList()
@@ -55,7 +56,7 @@ class GuestServiceTest {
     @Test
     fun `deve criar um convidado quando os dados forem válidos`() {
         // Arrange
-        val createGuestRequest = CreateGuestRequest(name = "John Doe", ip = "192.168.1.1")
+        val createGuestRequest = CreateGuestRequest(name = "John Doe", ip = "192.168.1.1", profileUrl = "link")
         val guestDto = createGuestRequest.toDto()
 
         // Mock do repositório para simular a criação do convidado
@@ -77,9 +78,8 @@ class GuestServiceTest {
     fun `deve permitir que um convidado se junte a um quiz`() {
         // Arrange
         val guestOnQuizRequest = GuestOnQuizRequest(guestId = 1L, quizCode = "ABC123")
-
         // Mock da adição do convidado ao quiz
-        every { quizRepository.addGuest(guestOnQuizRequest) } returns Unit
+        every { quizRepository.addGuest(guestOnQuizRequest) } returns validQuiz.toEntity()
 
         // Act
         guestService.joinInQuiz(guestOnQuizRequest)
@@ -92,7 +92,7 @@ class GuestServiceTest {
     @Test
     fun `deve criar um convidado com dados válidos`() {
         // Arrange
-        val createGuestRequest = CreateGuestRequest(name = "John Doe", ip = "192.168.1.1")
+        val createGuestRequest = CreateGuestRequest(name = "John Doe", ip = "192.168.1.1", profileUrl = "link")
         val guestDto = createGuestRequest.toDto()
 
         // Mock do repositório para simular a criação do convidado
