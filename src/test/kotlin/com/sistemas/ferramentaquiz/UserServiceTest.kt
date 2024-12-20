@@ -1,33 +1,29 @@
+package com.sistemas.ferramentaquiz
+
 import com.guiodes.dizimum.domain.exception.ForbiddenException
 import com.sistemas.ferramentaquiz.api.request.AuthenticationRequest
 import com.sistemas.ferramentaquiz.api.request.CreateUserRequest
 import com.sistemas.ferramentaquiz.api.response.AuthenticationResponse
 import com.sistemas.ferramentaquiz.database.repository.UserRepository
-import com.sistemas.ferramentaquiz.database.repository.data.UserSpringDataRepository
 import com.sistemas.ferramentaquiz.dto.UserDto
 import com.sistemas.ferramentaquiz.service.JwtService
 import com.sistemas.ferramentaquiz.service.UserService
 import io.mockk.MockKAnnotations
 import io.mockk.every
-import io.mockk.impl.annotations.InjectMockKs
-import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import io.mockk.verify
-import org.apache.coyote.BadRequestException
-import org.junit.jupiter.api.Test
-import org.springframework.security.crypto.password.PasswordEncoder
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import org.mockito.Mockito.verify
+import org.springframework.security.crypto.password.PasswordEncoder
+import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
 
 class UserServiceTest {
     private val userRepository: UserRepository = mockk()
     private val passwordEncoder: PasswordEncoder = mockk()
     private val jwtService: JwtService = mockk()
-    private val repository: UserRepository = mockk()
     private val userService = UserService(userRepository, passwordEncoder, userRepository, jwtService)
-    private val userSpringDataRepository: UserSpringDataRepository = mockk()
 
     @BeforeEach
     fun setup() {
@@ -67,12 +63,10 @@ class UserServiceTest {
         every { userRepository.findByEmail(authenticationRequest.username) } returns user
         every { passwordEncoder.matches(authenticationRequest.password, user.password) } returns false
 
-
         val exception = assertThrows<ForbiddenException> {
             userService.generateJwtToken(authenticationRequest)
         }
         assertEquals("Invalid password!", exception.message)
-
 
         verify(exactly = 1) { userRepository.findByEmail(authenticationRequest.username) }
         verify(exactly = 1) { passwordEncoder.matches(authenticationRequest.password, user.password) }
@@ -81,7 +75,6 @@ class UserServiceTest {
 
     @Test
     fun `deve salvar novo usuario quando email nao existe`() {
-
         val request = CreateUserRequest(
             name = "Test User",
             email = "test@example.com",
@@ -90,7 +83,6 @@ class UserServiceTest {
 
         val encodedPassword = "encodedPassword123"
 
-        // Simula o UserDto que será salvo
         val userDtoToSave = UserDto(
             name = request.name,
             email = request.email,
@@ -100,9 +92,7 @@ class UserServiceTest {
         val userEntityToSave = userDtoToSave.toEntity()
 
         every { userRepository.findByEmail(request.email) } returns null
-
         every { passwordEncoder.encode(request.password) } returns encodedPassword
-
         every { userRepository.save(any()) } returns userEntityToSave.toDto()
 
         userService.save(request)
@@ -110,10 +100,12 @@ class UserServiceTest {
         verify(exactly = 1) { userRepository.findByEmail(request.email) }
         verify(exactly = 1) { passwordEncoder.encode(request.password) }
         verify(exactly = 1) {
-            userRepository.save(withArg {
-                assertEquals(userEntityToSave.email, it.email)
-                assertEquals(userEntityToSave.password, it.password)
-            })
+            userRepository.save(
+                withArg {
+                    assertEquals(userEntityToSave.email, it.email)
+                    assertEquals(userEntityToSave.password, it.password)
+                }
+            )
         }
     }
 }

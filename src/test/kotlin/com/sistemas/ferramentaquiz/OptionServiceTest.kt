@@ -1,6 +1,5 @@
 package com.sistemas.ferramentaquiz
 
-import com.guiodes.dizimum.domain.exception.BadRequestException
 import com.sistemas.ferramentaquiz.api.request.CreateOptionRequest
 import com.sistemas.ferramentaquiz.database.repository.OptionRepository
 import com.sistemas.ferramentaquiz.database.repository.QuestionRepository
@@ -19,7 +18,6 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import org.mockito.Mockito.verify
 
 class OptionServiceTest {
     private val optionRepository: OptionRepository = mockk()
@@ -28,10 +26,13 @@ class OptionServiceTest {
     private val optionService = OptionService(optionRepository, questionRepository)
 
     private val validQuestionId: Long = 123L
-    private val validQuestion = QuestionDto(id = validQuestionId, title = "Sample Question", description = "Sample Description", quizId = 1)
+    private val validQuestion =
+        QuestionDto(id = validQuestionId, title = "Sample Question", description = "Sample Description", quizId = 1)
 
-    private val optionDto = OptionDto(id = 1, description = "Sample Option", isRight = false, questionId = validQuestionId)
-    private val createOptionRequest = CreateOptionRequest(description = "Sample Option", isRight = false, questionId = validQuestionId)
+    private val optionDto =
+        OptionDto(id = 1, description = "Sample Option", isRight = false, questionId = validQuestionId)
+    private val createOptionRequest =
+        CreateOptionRequest(description = "Sample Option", isRight = false, questionId = validQuestionId)
 
     @BeforeEach
     fun setup() {
@@ -71,7 +72,8 @@ class OptionServiceTest {
     fun `deve salvar a opção quando não houver uma opção correta para a questão`() {
 
         val newOption = OptionDto(id = null, description = "New Option", isRight = true, questionId = validQuestionId)
-        val existingOptions = listOf(OptionDto(id = 2, description = "Other Option", isRight = false, questionId = validQuestionId))
+        val existingOptions =
+            listOf(OptionDto(id = 2, description = "Other Option", isRight = false, questionId = validQuestionId))
 
         every { questionRepository.findById(validQuestionId) } returns validQuestion
         every { optionRepository.findAllByQuestionId(validQuestionId) } returns existingOptions
@@ -86,5 +88,4 @@ class OptionServiceTest {
         verify(exactly = 1) { questionRepository.findById(validQuestionId) }
         verify(exactly = 1) { optionRepository.save(any<OptionDto>()) }
     }
-
 }

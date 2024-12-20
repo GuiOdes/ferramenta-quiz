@@ -2,20 +2,16 @@ package com.sistemas.ferramentaquiz
 
 import com.sistemas.ferramentaquiz.api.controller.QuestionController
 import com.sistemas.ferramentaquiz.api.request.CreateQuestionRequest
-
 import com.sistemas.ferramentaquiz.database.repository.QuestionRepository
 import com.sistemas.ferramentaquiz.database.repository.QuizRepository
-import com.sistemas.ferramentaquiz.database.repository.UserRepository
 import com.sistemas.ferramentaquiz.dto.QuestionDto
 import com.sistemas.ferramentaquiz.dto.QuizDto
 import com.sistemas.ferramentaquiz.dto.QuizStatus
 import com.sistemas.ferramentaquiz.dto.UserDto
 import com.sistemas.ferramentaquiz.exception.NotFoundException
-import com.sistemas.ferramentaquiz.service.JwtService
 import com.sistemas.ferramentaquiz.service.QuestionService
 import io.mockk.clearMocks
 import io.mockk.every
-
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -24,11 +20,8 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-
 class QuestionServiceTest {
     private val service: QuestionService = mockk()
-    private val jwtService: JwtService = mockk()
-
 
     private val controller = QuestionController(service)
 
@@ -36,8 +29,6 @@ class QuestionServiceTest {
     private val quizRepository: QuizRepository = mockk()
     private val questionService = QuestionService(questionRepository, quizRepository)
 
-
-    private val userRepository: UserRepository = mockk()
     private val userDto = UserDto(
         id = 1,
         email = "test@example.com",
@@ -46,12 +37,6 @@ class QuestionServiceTest {
     )
 
     private val validQuizId = 1L
-    private val invalidQuizId = 999L
-    private val validRequest = CreateQuestionRequest(
-        title = "Question Title",
-        description = "Question Description",
-        quizId = validQuizId
-    )
 
     private val validQuiz = QuizDto(
         id = validQuizId,

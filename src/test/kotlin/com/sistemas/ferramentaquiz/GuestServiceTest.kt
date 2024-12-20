@@ -1,31 +1,22 @@
+package com.sistemas.ferramentaquiz
+
 import com.sistemas.ferramentaquiz.api.request.CreateGuestRequest
-import com.sistemas.ferramentaquiz.api.request.CreateQuestionRequest
 import com.sistemas.ferramentaquiz.api.request.GuestOnQuizRequest
-import com.sistemas.ferramentaquiz.dto.GuestDto
-import com.sistemas.ferramentaquiz.exception.NotFoundException
-import com.sistemas.ferramentaquiz.service.GuestService
 import com.sistemas.ferramentaquiz.database.repository.GuestRepository
 import com.sistemas.ferramentaquiz.database.repository.QuizRepository
 import com.sistemas.ferramentaquiz.dto.QuizDto
 import com.sistemas.ferramentaquiz.dto.QuizStatus
 import com.sistemas.ferramentaquiz.dto.UserDto
+import com.sistemas.ferramentaquiz.service.GuestService
 import io.mockk.every
-import io.mockk.verify
 import io.mockk.mockk
-import org.junit.jupiter.api.Assertions.*
+import io.mockk.verify
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.data.crossstore.ChangeSetPersister
-import org.springframework.http.HttpStatus
-import org.springframework.web.server.ResponseStatusException
-
+import kotlin.test.assertNotNull
 
 class GuestServiceTest {
-
-    @Autowired
-    private lateinit var guestService: GuestService
+    private var guestService: GuestService
 
     private val guestRepository: GuestRepository = mockk()
     private val quizRepository: QuizRepository = mockk()
@@ -33,6 +24,7 @@ class GuestServiceTest {
     init {
         guestService = GuestService(guestRepository, quizRepository)
     }
+
     private val userDto = UserDto(
         id = 1,
         email = "test@example.com",
@@ -41,7 +33,6 @@ class GuestServiceTest {
     )
 
     private val validQuizId = 1L
-
 
     private val validQuiz = QuizDto(
         id = validQuizId,
@@ -109,6 +100,4 @@ class GuestServiceTest {
         // Verificar que o repositório foi chamado para salvar o convidado
         verify(exactly = 1) { guestRepository.save(any()) }
     }
-
 }
-
